@@ -1,0 +1,180 @@
+{% extends "fixngo/base.html" %}
+{% block content %}
+<header style="margin: 3vw;">
+    <h1>My Repairs</h1>
+</header>
+
+<main style="margin: 5vh;">
+    <section class="softwareRepairs" style="margin: 5vh;">
+        <h2>Software Repairs</h2>
+        {% if software %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Request # (Click me to view more)</th>
+                <th scope="col">Repair Name</th>
+                <th scope="col">Fixer Status</th>
+                <th scope="col">Has this been Fixed?</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for request in software %}
+            <tr>
+                <th scope="row">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#software">
+                        {{request.id}}
+                    </button>
+                </th>
+                <td>{{request.repair_name}}</td>
+                <td>
+                    {% if request.is_taken %}
+                        Found a Fixer
+                        {% else %}
+                        Finding a Fixer
+                    {% endif %}
+                </td>
+                <td>
+                    {% if request.is_Fixed %}
+                        All Fixed! 🤗 
+                        <a href="/soft_review/{{request.id}}">Leave a review here</a>
+                    {% else %}
+                        Still broken 😔
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+            <div class="modal fade" id="software" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{request.repair_name}}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><span style="font-weight: 600;">Repair Name:</span> {{request.repair_name}}</p>
+                        <p><span style="font-weight: 600;">Description:</span> {{request.description}}</p>
+                        <p><span style="font-weight: 600;">Date Requested:</span> {{request.pub_date}}</p>
+                        <p><span style="font-weight: 600;">Operating System:</span> {{request.operating_system}}</p>
+                        <p><span style="font-weight: 600;">Postal Code:</span> {{request.customer_postalCode}}</p>
+                        <p>
+                            <span style="font-weight: 600;">Fixer Status:</span> 
+                            {% if request.is_taken %}
+                            Found a Fixer
+                            {% else %}
+                            Finding a Fixer
+                            {% endif %}
+                        </p>
+                        <p>
+                            <span style="font-weight: 600;">Has this been Fixed?</span> 
+                            {% if request.is_Fixed %}
+                            All Fixed! 🤗 <a href="/soft_review/{{request.id}}">Leave a review here</a>
+                            
+                            {% else %}
+                            Still broken 😔
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                      <a href="/software/{{request.id}}" class="btn btn-primary">View More</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </section>
+
+    
+    <section class="hardwareRepairs" style="margin: 5vh;">
+        <h2>Hardware Repairs</h2>
+        {% if hardware %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Request # (Click me to view more)</th>
+                <th scope="col">Repair Name</th>
+                <th scope="col">Fixer Status</th>
+                <th scope="col">Has this been Fixed?</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for request in hardware %}
+            <tr>
+                <th scope="row">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hardware">
+                        {{request.id}}
+                    </button>
+                </th>
+                <td>{{request.repair_name}}</td>
+                <td>
+                    {% if request.is_taken %}
+                        Found a Fixer
+                        {% else %}
+                        Finding a Fixer
+                    {% endif %}
+                </td>
+                <td>
+                    {% if request.is_Fixed %}
+                        All Fixed! 🤗 <a href="/hard_review/{{request.id}}">Leave a review here</a>
+                    {% else %}
+                        Still broken 😔
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+            <div class="modal fade" id="hardware" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{request.repair_name}}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><span style="font-weight: 600;">Repair Name:</span> {{request.repair_name}}</p>
+                        <p><span style="font-weight: 600;">Description:</span> {{request.description}}</p>
+                        <p><span style="font-weight: 600;">Date Requested:</span> {{request.pub_date}}</p>
+                        <p><span style="font-weight: 600;">Device:</span> {{request.device}}</p>
+                        <p><span style="font-weight: 600;">Postal Code:</span> {{request.customer_postalCode}}</p>
+                        <p>
+                            <span style="font-weight: 600;">Fixer Status:</span> 
+                            {% if request.is_taken %}
+                            Found a Fixer
+                            {% else %}
+                            Pending Fixer
+                            {% endif %}
+                        </p>
+                        <p>
+                            <span style="font-weight: 600;">Has this been Fixed?</span> 
+                            {% if request.is_Fixed %}
+                            All Fixed! 🤗 <a href="/hard_review/{{request.id}}">Leave a review here</a>
+                            {% else %}
+                            Still broken 😔
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <a href="/hardware/{{request.id}}" class="btn btn-primary">View More</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </section>
+</main>
+
+<script>
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+    })
+</script>
+
+{% endblock %}

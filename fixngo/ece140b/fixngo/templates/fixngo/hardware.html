@@ -1,0 +1,33 @@
+{% extends "fixngo/base.html" %}
+{% block content %}
+    <header style="margin: 5vh;">
+        <h1>Hardware Repair</h1>
+    </header>
+    
+    <main style="margin: 5vh 20vw 15vh 15vw;">
+        <form action="{% url 'fixngo:hardware' %}" id="repairForm" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="repair_name" class="form-label">Repair Name:</label>
+              <input type="text" class="form-control" name="repair_name" required>
+            </div>
+            <label for="Device">Operating System:</label>
+            <select name="device" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                <option value="Laptop">Laptop</option>
+                    <option value="Desktop">Desktop</option>
+                    <option value="N/A">Others: please specify below</option>
+            </select>
+            <label for="info">Describe the problem as best you can:</label>
+            <div class="form-floating">
+                <textarea name="info" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="postalcode" class="form-label">Postal Code:</label>
+                <input type="number" name="postalcode" class="form-control" placeholder="92093" min="90001" max="96162" required>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </main>
+
+{% endblock %}

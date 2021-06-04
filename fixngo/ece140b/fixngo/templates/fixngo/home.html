@@ -1,0 +1,131 @@
+{% extends 'fixngo/base.html' %}
+{% block content %}
+
+<style>
+    :root{
+    --primary-color: #3C64B1;
+    --secondary-color: #d7d7d7;
+}
+
+html{
+    font-family: 'Lato', sans-serif;
+}
+
+body{
+    margin: 0;
+}
+
+/* header */
+
+header{
+    background-color: var(--secondary-color);
+    padding: 5vh;
+}
+
+h1{
+    margin: 0;
+    font-size: 1rem;
+}
+
+h2 {
+    margin: 0;
+}
+
+.repairTypes{
+    font-size: 1.5rem;
+    margin: 4vh;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.repairLinks{
+    text-decoration: none;
+    background-color: rgb(107, 107, 227);
+    padding: 1vh;
+    border-radius: 10px;
+    transition: transform .2s;
+}
+
+.repairLinks:hover{
+    transform: scale(1.08);
+}
+
+.subHeading{    
+    font-size: 1.7rem;
+    text-align: center;
+}
+/* header */
+
+/* main */
+.fixIMG{
+    border-radius: 15px;
+    width: 60%;
+    height: auto;
+    margin-right: 3vh;
+
+}
+
+.join{
+    margin: 5vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.container{
+    margin-bottom: 5vh;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.content{
+    font-size: 1.4rem;
+}
+
+.contentDescription{
+    max-width: 70%;
+}
+
+/* main */
+
+</style>
+
+<header>
+    <h1>FIND A FIXER</h1>
+    <h2>GET YOUR REPAIR A$AP</h2>
+    <div class="repairTypes">
+        <a class="repairLinks" href="{% url 'fixngo:software' %}" class="software" style="color: white;">Software Repair</a>
+        <a class="repairLinks" href="{% url 'fixngo:hardware' %}" class="hardware" style="color: white;">Hardware Repair</a>
+    </div>
+    
+    <span class="subHeading"><p>Anything from a broken display to custom PC builds - <b>repaired</b>  in a day*.</p></span>
+</header>
+
+<main>
+    <section class="join">
+        
+        <div class="container">
+            <img class="fixIMG" rel="preload" src="https://source.unsplash.com/g5f0BJq-FRs/" alt="">
+            <div class="content">
+                <h3>Become a Fixer 🔨</h3>
+                
+                <p class="contentDescription">As a <b>fixer</b>, you'll make reliable money - working at your own pace, 
+                    whenever and wherever you wish. </p>
+            </div>
+        </div>
+
+        <div class="container"> 
+            <div class="content">
+                <h3>Become a Partner 🤝</h3>
+                
+                <p class="contentDescription">As a partner of <b>fix-n-go</b> , 
+                we can help you grow your business and help you reach new customers by partnering with us.</p>
+            </div>
+            <img class="fixIMG" rel="preload" src="https://source.unsplash.com/fQxMGkYXqFU/" alt="motherboard pic from unsplash">
+        </div>            
+    </section>
+</main>
+{% endblock %}

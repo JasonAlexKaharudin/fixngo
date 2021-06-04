@@ -1,0 +1,56 @@
+{% extends 'Fixers/base.html' %}
+{% block content %}
+
+<main style="margin: 5vh;">
+    <h1>My Jobs</h1>
+    <section class="software">
+        {%if software%}
+        <h2>Software Jobs</h2>
+        {% for request in software %}
+        <div class="card" style="width: 18rem; margin: 5vh;">
+            <div class="card-body">
+            <h5 class="card-title">{{request.repair_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{request.pub_date}}</h6>
+            <p class="card-text">Repair Description:{{request.description}}</p>
+            <p class="card-text">Client Location: {{request.customer_postalCode}}</p>
+            
+            {% if request.is_Fixed%}
+            <p class="btn btn-primary">Request Fulfilled!</p>
+            <p class="card-text">Review: {{request.review}}</p>
+            {% else %}
+            <a href="/finishSoftJob/{{request.id}}" class="btn btn-primary">List as done</a>
+            
+            {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </section>
+    
+
+    <section class="hardware">
+        {%if hardware%}
+        <h2>Hardware Jobs</h2>
+        {% for request in hardware %}
+        <div class="card" style="width: 18rem; margin: 5vh;">
+            <div class="card-body">
+            <h5 class="card-title">{{request.repair_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{request.pub_date}}</h6>
+            <p class="card-text">Repair Description:{{request.description}}</p>
+            <p class="card-text">Client Location: {{request.customer_postalCode}}</p>
+            
+            {% if request.is_Fixed%}
+            <p class="btn btn-primary">Request Fulfilled!</p>
+            <p class="card-text">Review: {{request.review}}</p>
+            {% else %}
+            <a href="/finishHardJob/{{request.id}}" class="btn btn-primary">List as done</a>
+            
+            {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}      
+    </section>
+    
+</main>
+{% endblock %}

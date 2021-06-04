@@ -1,0 +1,17 @@
+{% extends 'fixngo/base.html' %}
+{% block content %}
+
+{{request.repair_name}}
+<main style="margin: 5vh;">
+    <h1>Leave a Review</h1>
+    <form action="/soft_post_review/{{request.id}}/" method="POST">
+        {% csrf_token %}
+        <div class="form-floating">
+            <label for="review"></label>
+            <textarea name="review" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 3vh;">Submit</button>
+    </form>
+    
+</main>
+{% endblock %}

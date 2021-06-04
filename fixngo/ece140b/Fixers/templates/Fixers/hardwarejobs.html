@@ -1,0 +1,22 @@
+{% extends 'Fixers/base.html' %}
+{% block content %}
+
+<header style="margin: 5vh;">    
+    <h1>Job Details</h1>
+</header>
+
+<main style="margin: 10vh;">
+    {% if request %}
+
+    <p><span style="font-weight: 600;">Repair Name:</span> {{request.repair_name}}</p>
+    <p><span style="font-weight: 600;">Description:</span> {{request.description}}</p>
+    <p><span style="font-weight: 600;">Date Requested:</span> {{request.pub_date}}</p>
+    <p><span style="font-weight: 600;">Device:</span> {{request.device}}</p>
+    <p><span style="font-weight: 600;">Postal Code:</span> {{request.customer_postalCode}}</p>
+    {% endif %}
+
+    
+
+</main>
+
+{% endblock %}

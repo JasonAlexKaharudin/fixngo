@@ -1,0 +1,151 @@
+{% extends "Fixers/base.html" %}
+
+{% block content %}
+<header style="margin: 5vh;">
+    <h1>Available Jobs</h1>
+</header>
+
+<main style="margin: 5vh;">
+    {% if software %}
+    <h2 style="text-decoration: underline;">Software Requests</h2>
+    {% for request in software %}
+
+    <div class="card border-dark m-5" style="max-width: 18rem;">
+        <div class="card-header"> <span style="font-weight:700;">{{request.repair_name}}</span></div>
+        <div class="card-body text-dark">
+          <h5 class="card-title" style="font-weight: 400;">Client: {{request.Customer}}</h5>
+          <p class="card-text">Description: {{request.description}}</p>
+          <p class="card-text">Client Location: {{request.customer_postalCode}}</p>
+          
+          {% if request.is_Fixed %}
+          <p class="card-text">Status: Fixed</p>
+          {% else %}
+          <p class="card-text">Status: In need of repair</p>
+          {% endif %}
+        </div>
+        <div style="display: inline; text-align: center; padding-bottom: 2vh;">   
+            <a href="/softwarejob/{{request.id}}" class="btn btn-primary">Accept</a>
+            
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#software">
+                View More
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" id="software" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{request.repair_name}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><span style="font-weight: 600;">Repair Name:</span> {{request.repair_name}}</p>
+                <p><span style="font-weight: 600;">Description:</span> {{request.description}}</p>
+                <p><span style="font-weight: 600;">Date Requested:</span> {{request.pub_date}}</p>
+                <p><span style="font-weight: 600;">Operating System:</span> {{request.operating_system}}</p>
+                <p><span style="font-weight: 600;">Postal Code:</span> {{request.customer_postalCode}}</p>
+                <p>
+                    <span style="font-weight: 600;">Fixer Status:</span> 
+                    {% if request.is_taken %}
+                    Found a Fixer
+                    {% else %}
+                    Finding a Fixer
+                    {% endif %}
+                </p>
+                <p>
+                    <span style="font-weight: 600;">Has this been Fixed?</span> 
+                    {% if request.is_Fixed %}
+                    All Fixed! 🤗
+                    {% else %}
+                    Still broken 😔
+                    {% endif %}
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+
+    <h1>No Software Jobs available</h1>
+
+    {% endif %}
+    
+    
+
+
+
+
+    {% if hardware %}
+    <h2 style="text-decoration: underline;">Hardware Requests</h2>
+    {% for request in hardware %}
+
+    <div class="card border-dark m-5" style="max-width: 18rem;">
+        <div class="card-header"> <span style="font-weight:700;">{{request.repair_name}}</span></div>
+        <div class="card-body text-dark">
+          <h5 class="card-title" style="font-weight: 400;">Client: {{request.Customer}}</h5>
+          <p class="card-text">Description: {{request.description}}</p>
+          <p class="card-text">Client Location: {{request.customer_postalCode}}</p>
+          {% if request.is_Fixed %}
+          <p class="card-text">Status: Fixed</p>
+          {% else %}
+          <p class="card-text">Status: In need of repair</p>
+          {% endif %}
+        </div>
+        <div style="display: inline; text-align: center; padding-bottom: 2vh;">   
+            <a href="/hardwarejob/{{request.id}}" class="btn btn-primary">Accept</a>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#hardware">
+                View More
+            </button>
+        </div>
+        
+    </div>
+    <div class="modal fade" id="hardware" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{request.repair_name}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><span style="font-weight: 600;">Repair Name:</span> {{request.repair_name}}</p>
+                <p><span style="font-weight: 600;">Description:</span> {{request.description}}</p>
+                <p><span style="font-weight: 600;">Date Requested:</span> {{request.pub_date}}</p>
+                <p><span style="font-weight: 600;">Operating System:</span> {{request.operating_system}}</p>
+                <p><span style="font-weight: 600;">Postal Code:</span> {{request.customer_postalCode}}</p>
+                <p>
+                    <span style="font-weight: 600;">Fixer Status:</span> 
+                    {% if request.is_taken %}
+                    Found a Fixer
+                    {% else %}
+                    Finding a Fixer
+                    {% endif %}
+                </p>
+                <p>
+                    <span style="font-weight: 600;">Has this been Fixed?</span> 
+                    {% if request.is_Fixed %}
+                    All Fixed! 🤗
+                    {% else %}
+                    Still broken 😔
+                    {% endif %}
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+
+    <h1>No Hardware Jobs available</h1>
+    {% endif %}
+</main>
+
+{% endblock %}
+
